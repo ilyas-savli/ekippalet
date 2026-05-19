@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/legalpalet/">
   <title>Ahşap Palet Alımı - Ekip Palet</title>
   <meta name="description" content="Ekip Palet AHŞAP PALET ALIM - SATIMI İkinci El Ahşap Palet Çözümleri Yerinde Hizmet Sıfır ve ikinci el ahşap paletleriniz adresinizden alınır ve tüm palet ihtiyacınız adresinize teslim edilir">
   <meta name="keywords" content="palet, ahşap palet, ikinci el palet, palet alım, palet satım, Aydın palet, ekip palet">
@@ -44,7 +43,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -139,18 +137,24 @@
     <!-- PRODUCT SLIDER -->
     <section class="product-slider-section">
       <div class="wrapper">
-        <div class="swiper product-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="assets/images/ikinci-el-palet-nedir-1-removebg-preview.png" alt="İkinci El Palet"></div>
-            <div class="swiper-slide"><img src="assets/images/images-removebg-preview.png" alt="Ahşap Palet"></div>
-            <div class="swiper-slide"><img src="assets/images/konya-ikinci-el-palet-removebg-preview-300x240.png" alt="Konya İkinci El Palet"></div>
-            <div class="swiper-slide"><img src="assets/images/services_banner_2255129358-removebg-preview-300x200.png" alt="Palet Hizmet"></div>
-            <div class="swiper-slide"><img src="assets/images/ikinci-el-palet-fiyatlari-izmir-removebg-preview-300x246.png" alt="İkinci El Palet Fiyatları"></div>
-            <div class="swiper-slide"><img src="assets/images/unnamed-removebg-preview-300x183.png" alt="Palet"></div>
+        <div class="slider-container">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slider-slide"><img src="assets/images/ikinci-el-palet-nedir-1-removebg-preview.png" alt="İkinci El Palet"></div>
+            <div class="slider-slide"><img src="assets/images/images-removebg-preview.png" alt="Ahşap Palet"></div>
+            <div class="slider-slide"><img src="assets/images/konya-ikinci-el-palet-removebg-preview-300x240.png" alt="Konya İkinci El Palet"></div>
+            <div class="slider-slide"><img src="assets/images/services_banner_2255129358-removebg-preview-300x200.png" alt="Palet Hizmet"></div>
+            <div class="slider-slide"><img src="assets/images/ikinci-el-palet-fiyatlari-izmir-removebg-preview-300x246.png" alt="İkinci El Palet Fiyatları"></div>
+            <div class="slider-slide"><img src="assets/images/unnamed-removebg-preview-300x183.png" alt="Palet"></div>
+            <div class="slider-slide"><img src="assets/images/ikinci-el-palet-nedir-1-removebg-preview.png" alt="İkinci El Palet"></div>
+            <div class="slider-slide"><img src="assets/images/images-removebg-preview.png" alt="Ahşap Palet"></div>
+            <div class="slider-slide"><img src="assets/images/konya-ikinci-el-palet-removebg-preview-300x240.png" alt="Konya İkinci El Palet"></div>
+            <div class="slider-slide"><img src="assets/images/services_banner_2255129358-removebg-preview-300x200.png" alt="Palet Hizmet"></div>
+            <div class="slider-slide"><img src="assets/images/ikinci-el-palet-fiyatlari-izmir-removebg-preview-300x246.png" alt="İkinci El Palet Fiyatları"></div>
+            <div class="slider-slide"><img src="assets/images/unnamed-removebg-preview-300x183.png" alt="Palet"></div>
           </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+          <button class="slider-btn slider-btn-prev" onclick="slidePrev()">&#10094;</button>
+          <button class="slider-btn slider-btn-next" onclick="slideNext()">&#10095;</button>
+          <div class="slider-dots" id="sliderDots"></div>
         </div>
       </div>
     </section>
@@ -379,7 +383,37 @@
 
 </div>
 <script src="assets/js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>document.addEventListener('DOMContentLoaded',function(){new Swiper('.product-swiper',{slidesPerView:2,spaceBetween:16,loop:true,autoplay:{delay:3000,disableOnInteraction:false,stopOnLastSlide:false},speed:600,pagination:{el:'.swiper-pagination',clickable:true},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},breakpoints:{640:{slidesPerView:4},1024:{slidesPerView:5}}})});</script>
+<script>
+var slideIndex = 0;
+var slideTimer;
+var slides = document.querySelectorAll('#sliderTrack .slider-slide');
+var totalSlides = 6;
+
+function showSlide(n) {
+  slideIndex = ((n % totalSlides) + totalSlides) % totalSlides;
+  var track = document.getElementById('sliderTrack');
+  var slideWidth = 100 / totalSlides;
+  track.style.transform = 'translateX(-' + (slideIndex * slideWidth) + '%)';
+  var dots = document.querySelectorAll('.slider-dot');
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === slideIndex); });
+}
+
+function slideNext() { clearInterval(slideTimer); showSlide(slideIndex + 1); startTimer(); }
+function slidePrev() { clearInterval(slideTimer); showSlide(slideIndex - 1); startTimer(); }
+function goToSlide(n) { clearInterval(slideTimer); showSlide(n); startTimer(); }
+function startTimer() { slideTimer = setInterval(function() { showSlide(slideIndex + 1); }, 3000); }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var dotsContainer = document.getElementById('sliderDots');
+  for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('span');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('onclick', 'goToSlide(' + i + ')');
+    dotsContainer.appendChild(dot);
+  }
+  showSlide(0);
+  startTimer();
+});
+</script>
 </body>
 </html>

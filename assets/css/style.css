@@ -239,16 +239,24 @@ button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="su
   .product-grid{grid-template-columns:repeat(2,1fr)}
 }
 .product-slider-section{padding:40px 0;background:#fff}
-.product-slider-section .swiper{overflow:hidden;padding:10px 0 50px}
-.product-slider-section .swiper-slide{display:flex;align-items:center;justify-content:center;height:160px;background:#f8fafc;border:1px solid #eee;border-radius:8px;padding:20px}
-.product-slider-section .swiper-slide img{max-height:120px;width:auto;object-fit:contain;transition:transform .3s}
-.product-slider-section .swiper-slide:hover img{transform:scale(1.08)}
-.product-slider-section .swiper-button-next,
-.product-slider-section .swiper-button-prev{color:#F8BB23;background:rgba(255,255,255,.9);width:40px;height:40px;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.product-slider-section .swiper-button-next:after,
-.product-slider-section .swiper-button-prev:after{font-size:16px}
-.product-slider-section .swiper-pagination-bullet-active{background:#F8BB23}
-@media(max-width:480px){
-  .product-slider-section .swiper-slide{height:120px}
-  .product-slider-section .swiper-slide img{max-height:80px}
+.slider-container{position:relative;overflow:hidden;width:100%}
+.slider-track{display:flex;transition:transform .5s ease;width:200%}
+.slider-slide{flex:0 0 calc(100%/6);display:flex;align-items:center;justify-content:center;height:160px;padding:10px;box-sizing:border-box}
+.slider-slide img{max-height:120px;width:auto;object-fit:contain;transition:transform .3s;border-radius:8px}
+.slider-slide img:hover{transform:scale(1.08)}
+.slider-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;background:rgba(255,255,255,.9);border:none;color:#F8BB23;font-size:18px;width:40px;height:40px;border-radius:50%;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:all .3s}
+.slider-btn:hover{background:#F8BB23;color:#fff}
+.slider-btn-prev{left:10px}.slider-btn-next{right:10px}
+.slider-dots{text-align:center;padding:15px 0 0}
+.slider-dot{display:inline-block;width:10px;height:10px;margin:0 5px;border-radius:50%;background:#ddd;cursor:pointer;transition:background .3s}
+.slider-dot.active{background:#F8BB23}
+@media(max-width:640px){
+  .slider-slide{flex:0 0 calc(100%/2);height:120px}
+  .slider-slide img{max-height:80px}
+}
+@media(min-width:641px)and(max-width:1023px){
+  .slider-slide{flex:0 0 calc(100%/4)}
+}
+@media(min-width:1024px){
+  .slider-slide{flex:0 0 calc(100%/6)}
 }

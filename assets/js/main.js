@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   hasChildren.forEach(function(item) {
     item.addEventListener('click', function(e) {
       if (window.innerWidth <= 768) {
+        if (e.target.closest('.sub-menu')) return;
         var ul = this.querySelector('ul');
         if (ul) {
           e.preventDefault();

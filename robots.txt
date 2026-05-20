@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.legalpalet.com/sitemap.xml
+Sitemap: https://ekippalet.com/sitemap.xml

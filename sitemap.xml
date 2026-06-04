@@ -48,4 +48,8 @@
     <loc>https://ekippalet.com/iletisim/</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://ekippalet.com/yem-urunleri/</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
